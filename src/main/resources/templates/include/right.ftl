@@ -5,7 +5,8 @@
             <#list results as goods>
                 <dd>
                     <a href="jie/detail.html">${goods.name}</a>
-                    <span><i class="iconfont icon-pinglun1"></i>${goods.num}</span>
+                    <br>
+                    <span>销售数量：${goods.num}</span>
                 </dd>
             </#list>
         </@hots>
