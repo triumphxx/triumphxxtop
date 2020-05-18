@@ -51,8 +51,8 @@ public class SellServiceImpl extends ServiceImpl<SellMapper, Sell> implements Se
             //2、将销售货物一天的销售的数量进行数据缓存
             redisUtil.zSet(Constants.REDIS_KEY.GOODS_TOP_KEY+goods.getGoodsId(),goods.getGoodsId(),goods.getSellNum());
             //设置过期时间 当天有效
-            //0点的时间减去现在的时间换算层毫秒数
-            Long expireTime =   dateUtil.initDateByDay()-DateUtil.currentSeconds();
+            //0点的时间减去现在的时间换算成毫秒数
+            Long expireTime =   dateUtil.initDateByDay()-System.currentTimeMillis();
             redisUtil.expire(Constants.REDIS_KEY.GOODS_TOP_KEY+goods.getGoodsId(),expireTime);
             //同时缓存一下货物的基本信息 货物id 货物名称 销售货物数量
             this.hasCacheGoods(goods,expireTime);

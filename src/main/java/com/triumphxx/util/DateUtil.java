@@ -2,8 +2,7 @@ package com.triumphxx.util;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * @author:triumphxx
@@ -17,12 +16,10 @@ public class DateUtil {
 
       //获取当天的0点时间的毫秒数
       public  Long initDateByDay() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        return calendar.getTime().getTime();
+          long current=System.currentTimeMillis();//当前时间毫秒数
+          long zero=current/(1000*3600*24)*(1000*3600*24)- TimeZone.getDefault().getRawOffset();//今天零点零分零秒的毫秒数
+          long twelve=zero+24*60*60*1000-1;//今天23点59分59秒的毫秒数
+          return twelve;
     }
 
 }
